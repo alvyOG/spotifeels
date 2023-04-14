@@ -1,10 +1,18 @@
 import requests
 from bs4 import BeautifulSoup
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+import apiData
 
+# Step 1: Gather albums from Billboard
+# Step 2: Gather songs per album from Spotify
+# Step 3: Write songs (features) to database?
 
 class DatabaseGenerator:
     startYear = 2002
     endYear = 2023
+    cid = apiData.SPOTIFY_CLIENT_ID
+    secret = apiData.SPOTIFY_CLIENT_SECRET
 
     def generate_albums_list(self, start_year, end_year):
         albums_year_list = []
@@ -38,9 +46,19 @@ class DatabaseGenerator:
             })
         return albums_year_list
 
+    def get_spotify_client(self, cid, secret):
+        client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
+        sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+        return sp
+
 def main():
+    # Step 1
     generator = DatabaseGenerator()
     album_year_list = generator.generate_albums_list(2002, 2023)
     print(album_year_list)
+    # Step 2
+    spotify_client = generator.get_spotify_client(generator.cid, generator.secret)
+    print(spotify_client.available_markets())
+    spotify_client.search()
 
 main()
