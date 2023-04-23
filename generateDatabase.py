@@ -19,17 +19,21 @@ class DatabaseGenerator:
     secret = apiData.SPOTIFY_CLIENT_SECRET
 
     def generate_albums_list(self, start_year, end_year):
+        """Generates and returns a list of album data for albums between given start and end years."""
         albums_year_list = []
         url_p1 = "https://www.billboard.com/charts/year-end/"  # add year after
         url_p2 = "/top-billboard-200-albums/"  # add p2 after year
         for year in range(start_year, end_year):
+            # Get URLs for each year in range
             url = url_p1 + str(year) + url_p2
             page = requests.get(url)
             soup = BeautifulSoup(page.content, "html.parser")
 
+            # Get all albums on page
             albums_list = []
             albums = soup.find_all("h3", id="title-of-a-story")
             count = 1
+            # For each album found, make sure it exists and parse artist info
             for album in albums:
                 if count < 201:
                     if album:
@@ -42,6 +46,7 @@ class DatabaseGenerator:
                                 "artist": artist_text,
                             })
                     count += 1
+            # Update albums_year_list with all info on albums from the curr year in range
             albums_year_list.append({
                 "year": year,
                 "num_albums": len(albums_list),
@@ -51,11 +56,13 @@ class DatabaseGenerator:
         return albums_year_list
 
     def get_spotify_client(self, cid, secret):
+        """Accesses secret credentials and returns Spotify client object."""
         client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
         sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
         return sp
 
     def get_spotify_album_id(self, spotify_client, name, artist):
+        """Given the name and artist of an album, use the spotify client to search for the album and return its id."""
         sp = spotify_client
         if not artist == "Soundtrack":
             q_string = "album:" + str(name) + " artist:" + str(artist)
@@ -72,14 +79,19 @@ class DatabaseGenerator:
         return album_id
 
     def get_spotify_album_tracks_features(self, spotify_client, album_id):
+        """Search for the provided album id and return a list of info on all tracks within that album."""
         sp = spotify_client
         tracks = []
+
+        # If album_id does not exist, or an HTTP error occurs, return empty list
         if album_id == 0:
             return tracks
         try:
             response = sp.album_tracks(album_id, 50, 0, "US")
         except requests.exceptions.HTTPError:
             return tracks
+        
+        # For each track in the album, record track data and append to track list
         for i in response["items"]:
             track_id = i["id"]
             track_name = i["name"]
@@ -106,6 +118,7 @@ class DatabaseGenerator:
         return tracks
 
     def generate_albums_tracks_features_list(self, album_year_list, start_year, end_year):
+        """Write all ablum and track info to csv."""
         with open("TrackFeaturesDatabase.csv", "a", newline="", encoding='utf-8') as csv_file:
             field_names = [
                 "track_id", "track_name", "album", "artist", "album_id", "danceability",
