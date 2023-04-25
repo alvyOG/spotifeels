@@ -263,29 +263,29 @@ if __name__ == '__main__':
     #     print("building index, iteration "+str(x+1))
     #     build_index(ind)
 
-    df = pd.read_csv('TrackFeaturesDatabase - Copy.csv', low_memory=False)
-    for x in range(3360):
-        ind = []
-        lower_bound = x*10 + 1400
-        for y in range(10):
-            # q = df['artists'][lower_bound]
-            # # if type(q) == 'float':
-            # #     print(q)
-            # artist_name = ""
-            # for y in ast.literal_eval(str(q).replace('\n', ',')):
-            #     # print(y['name'])
-            #     artist_name += y['track_name'] + ' and '
-            # artist_name = artist_name[:-5]
-            #print(artist_name)
-            ind.append((df['track_name'][lower_bound], df['artist'][lower_bound], df['track_id'][lower_bound]))
-            #song_artist_id_genre.loc[len(song_artist_id_genre)] = [df['name'][x], artist_name, df['id'][x], df['genre'][x]]
-            #print(x)
-            lower_bound += 1
-            #song_artist_id_genre.to_csv('song_artist_id_genre.csv')
-            # print(ast.literal_eval(df['artists'][3])[0])
-            # print(df['artists'][2].replace('\n', ''))
-        print("building index, iteration "+str(x+1))
-        build_index(ind)
+    # df = pd.read_csv('TrackFeaturesDatabase - Copy.csv', low_memory=False)
+    # for x in range(3360):
+    #     ind = []
+    #     lower_bound = x*10 + 1400
+    #     for y in range(10):
+    #         # q = df['artists'][lower_bound]
+    #         # # if type(q) == 'float':
+    #         # #     print(q)
+    #         # artist_name = ""
+    #         # for y in ast.literal_eval(str(q).replace('\n', ',')):
+    #         #     # print(y['name'])
+    #         #     artist_name += y['track_name'] + ' and '
+    #         # artist_name = artist_name[:-5]
+    #         #print(artist_name)
+    #         ind.append((df['track_name'][lower_bound], df['artist'][lower_bound], df['track_id'][lower_bound]))
+    #         #song_artist_id_genre.loc[len(song_artist_id_genre)] = [df['name'][x], artist_name, df['id'][x], df['genre'][x]]
+    #         #print(x)
+    #         lower_bound += 1
+    #         #song_artist_id_genre.to_csv('song_artist_id_genre.csv')
+    #         # print(ast.literal_eval(df['artists'][3])[0])
+    #         # print(df['artists'][2].replace('\n', ''))
+    #     print("building index, iteration "+str(x+1))
+    #     build_index(ind)
 
     # genius.skip_non_songs = True
     # genius.verbose = True
