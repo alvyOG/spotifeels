@@ -4,14 +4,17 @@ import re, string, operator, math
 import pandas as pd
 import requests.exceptions
 
-import PorterStemmer
+from . import PorterStemmer
 import json
 from wordcloud import STOPWORDS
 import ast
-import geniusAPI
+from . import geniusAPI
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from nltk.corpus import stopwords
+
+from django.conf import settings
+import os
 
 api_key = "fnLpxVmCwp7oOq3QwWB-u_NssokWTV19wG16IZjSBbR02YhYgfaJtVzEbHddeThk"
 
@@ -184,7 +187,8 @@ def search(query, top_k):
     lyric_term_tfidfs = {}
     song_artist_set = set()
     search_stems = stemming(tokenize(query))
-    with open('index.json') as json_file:
+    index_file_name = os.path.join(settings.BASE_DIR, 'search/Utils/index.json')
+    with open(index_file_name) as json_file:
         index = json.load(json_file)
     for x in index:
         for song_artist in index[x]:
