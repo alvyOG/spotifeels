@@ -1,12 +1,13 @@
 h1 {
-    color: red;
+    color: #fa6400;
 }
 
-.container {
+.search-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /*height: 100vh;*/
+    flex-direction: column;
   }
   
   .form {
@@ -19,7 +20,29 @@ h1 {
   input[type="text"] {
     padding: 0.5rem;
     margin-right: 1rem;
+    width: 50vh;
+    height: 1.65rem
   }
+
+  .search-prompt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .search-output {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+.title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
 
 
 

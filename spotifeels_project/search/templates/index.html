@@ -8,29 +8,24 @@
 </head>
 
 <body>
-    <h1>Hello, World!</h1>
-    <br>
-    Sum from helper function: {{ sum }}
-    <br>
-    <br>
-
-    <div class="container">
-        <!-- Cretae a form where user can type and submit text -->
-        <form method="POST" class="form">
-            {% csrf_token %}
-            Query: <input type="text" name="user_input">
-            <button type="submit" class="button">Submit</button>
-        </form>
-        <br>
-        User input: {{ user_input }}
+    <div class="title-container">
+        <h1>Spotifeels</h1>
     </div>
 
-    <br>
-
-    
+    <div class="search-container">
+        <!-- Create a form where user can type and submit text -->
+        <div class="search-prompt">
+            <p>Input a Phrase to Describe Your Playlist</p>
+        </div>
+        <form method="POST" class="form">
+            {% csrf_token %}
+            <input type="text" name="user_input">
+            <button type="submit" class="button">Submit</button>
+        </form>
+        <div class="search-output">
+            <p>Playlist</p>
+            <p>{{ playlist_output }}</p>
+        </div>
+    </div>
 </body>
-
-
-
-
 </html>
