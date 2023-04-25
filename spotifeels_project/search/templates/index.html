@@ -1,16 +1,36 @@
-Hello, World!
-<br>
-Sum from helper function: {{ sum }}
-<br>
-<br>
+<!DOCTYPE html>
+<html lang="en">
 
-<!-- Cretae a form where user can type and submit text -->
-<form method="POST">
-    {% csrf_token %}
-    Query: <input type="text" name="user_input">
-    <button type="submit">Submit</button>
-</form>
+<head>
+    <title>Spotifeels</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+</head>
 
-<br>
+<body>
+    <h1>Hello, World!</h1>
+    <br>
+    Sum from helper function: {{ sum }}
+    <br>
+    <br>
 
-User input: {{ user_input }}
+    <div class="container">
+        <!-- Cretae a form where user can type and submit text -->
+        <form method="POST" class="form">
+            {% csrf_token %}
+            Query: <input type="text" name="user_input">
+            <button type="submit" class="button">Submit</button>
+        </form>
+        <br>
+        User input: {{ user_input }}
+    </div>
+
+    <br>
+
+    
+</body>
+
+
+
+
+</html>
