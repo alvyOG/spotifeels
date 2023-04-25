@@ -54,7 +54,7 @@ ROOT_URLCONF = 'spotifeels_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['search/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

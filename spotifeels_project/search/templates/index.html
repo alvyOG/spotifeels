@@ -1,0 +1,16 @@
+Hello, World!
+<br>
+Sum from helper function: {{ sum }}
+<br>
+<br>
+
+<!-- Cretae a form where user can type and submit text -->
+<form method="POST">
+    {% csrf_token %}
+    Query: <input type="text" name="user_input">
+    <button type="submit">Submit</button>
+</form>
+
+<br>
+
+User input: {{ user_input }}
