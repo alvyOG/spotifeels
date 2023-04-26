@@ -14,7 +14,8 @@ def index(request):
     # Generate playlist from query
     # playlist_output = generatePlaylistFromQuery(playlist_query)
     playlist_output = ""
-    if user_input: playlist_output = lyric_scraper.create_playlist(user_input, 10)
+    if user_input:
+        playlist_output = lyric_scraper.create_playlist(user_input, 10)
 
     # Pass in data to the html page (sum and user input)
     #return render(request, "index.html", {"sum": s, "user_input": user_input})

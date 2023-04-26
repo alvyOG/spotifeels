@@ -133,3 +133,6 @@ apiData.py
 *.csv
 migrations/
 migrations/*
+search/migrations/*
+search/__pycache__/
+search/__pycache__/*
