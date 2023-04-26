@@ -226,7 +226,7 @@ def create_playlist(query, top_k):
 
     song_list = search(query, top_k)
     tracks = []
-
+    song_artist_list = []
     sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id='1e2a8192043a4d45a0d7de6104e8ca36',
                                                    client_secret='ebccd4a75315480397803bef2fc33fab',
                                                    redirect_uri='https://users.wpi.edu/~mrsuyer/index.html',
@@ -235,10 +235,14 @@ def create_playlist(query, top_k):
 
     playlist = sp.user_playlist_create(user='msuyer508', name=query, public=False)
     for song_artist_id in song_list:
+        song = song_artist_id.split(', ')[0]
+        artist = song_artist_id.split(', ')[1]
         id = song_artist_id.split(', ')[2]
+        song_artist_list.append(str(song) + ', ' + str(artist))
         tracks.append('spotify:track:'+str(id))
     sp.playlist_add_items(playlist_id=playlist['id'], items=tracks)
 
+    return song_artist_list
 
 if __name__ == '__main__':
 
